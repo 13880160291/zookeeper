@@ -554,7 +554,13 @@
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.8.1</version>
           <configuration>
-             <showWarnings>true</showWarnings>
+<!--            <source>1.8</source>-->
+<!--            <target>1.8</target>-->
+            <showWarnings>true</showWarnings>
+<!--            <verbose>true</verbose>-->
+<!--            <fork>true</fork>-->
+<!--            <encoding>UTF-8</encoding>-->
+<!--            <executable>${JAVA_HOME}/bin/javac</executable>-->
              <compilerArgs>
                <compilerArg>-Werror</compilerArg>
                <compilerArg>-Xlint:deprecation</compilerArg>
