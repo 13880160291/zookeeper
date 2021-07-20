@@ -1,0 +1,25 @@
+#!/bin/bash
+
+case $1 in
+"start")(
+    echo --------zookeeper $i start-----------------
+    for i in hadoop01 hadoop02 hadoop03
+    do
+        ssh $i "/path/zkServer.sh start"
+    done
+);;
+"stop")(
+    echo --------zookeeper $i stop-----------------
+    for i in hadoop01 hadoop02 hadoop03
+    do
+        ssh $i "/path/zkServer.sh stop"
+    done
+);;
+"status")(
+    echo --------zookeeper $i status-----------------
+    for i in hadoop01 hadoop02 hadoop03
+    do
+        ssh $i "/path/zkServer.sh status"
+    done
+);;
+esac
