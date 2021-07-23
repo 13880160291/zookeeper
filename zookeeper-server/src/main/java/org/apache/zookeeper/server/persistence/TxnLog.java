@@ -26,7 +26,8 @@ import org.apache.zookeeper.txn.TxnHeader;
 
 /**
  * Interface for reading transaction logs.
- *
+ * liam 2021-07-23
+ * 处理本地数据记录日志的接口
  */
 public interface TxnLog {
 

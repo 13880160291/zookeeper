@@ -22,7 +22,7 @@ import java.io.IOException;
 
 /**
  * Interface that all the Deserializers have to implement.
- *
+ * 反序列化必须实现的方法
  */
 public interface InputArchive {
     public byte readByte(String tag) throws IOException;
