@@ -79,6 +79,7 @@ public class QuorumPeerMain {
     public static void main(String[] args) {
         QuorumPeerMain main = new QuorumPeerMain();
         try {
+            //程序启动入口,初始化各种数据
             main.initializeAndRun(args);
         } catch (IllegalArgumentException e) {
             LOG.error("Invalid arguments, exiting abnormally", e);
@@ -110,16 +111,19 @@ public class QuorumPeerMain {
     {
         QuorumPeerConfig config = new QuorumPeerConfig();
         if (args.length == 1) {
+            //第一步 解析参数
             config.parse(args[0]);
         }
 
         // Start and schedule the the purge task
+        //第二步  定时任务(启动线程)清理过期快照
         DatadirCleanupManager purgeMgr = new DatadirCleanupManager(config
                 .getDataDir(), config.getDataLogDir(), config
                 .getSnapRetainCount(), config.getPurgeInterval());
         purgeMgr.start();
 
         if (args.length == 1 && config.isDistributed()) {
+            //第三步 多节点通信
             runFromConfig(config);
         } else {
             LOG.warn("Either no config or no quorum defined in config, running "
@@ -201,8 +205,9 @@ public class QuorumPeerMain {
           }
           quorumPeer.setQuorumCnxnThreadsSize(config.quorumCnxnThreadsSize);
           quorumPeer.initialize();
-          
+          //第四步 服务端启动（加载数据）
           quorumPeer.start();
+
           quorumPeer.join();
       } catch (InterruptedException e) {
           // warn, but generally this is ok

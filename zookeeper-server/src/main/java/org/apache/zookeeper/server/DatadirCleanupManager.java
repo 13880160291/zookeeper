@@ -97,6 +97,7 @@ public class DatadirCleanupManager {
             return;
         }
         // Don't schedule the purge task with zero or negative purge interval.
+        //判断快照清理机制是否开启：<=0 表示关闭
         if (purgeInterval <= 0) {
             LOG.info("Purge task is not scheduled.");
             return;

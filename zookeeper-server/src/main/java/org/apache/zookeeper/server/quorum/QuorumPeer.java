@@ -884,6 +884,7 @@ public class QuorumPeer extends ZooKeeperThread implements QuorumStats.Provider 
         if (!getView().containsKey(myid)) {
             throw new RuntimeException("My id " + myid + " not in the peer list");
          }
+        //加载数据
         loadDataBase();
         startServerCnxnFactory();
         try {
@@ -898,6 +899,7 @@ public class QuorumPeer extends ZooKeeperThread implements QuorumStats.Provider 
 
     private void loadDataBase() {
         try {
+            //加载快照和编辑日志数据
             zkDb.loadDataBase();
 
             // load the epochs

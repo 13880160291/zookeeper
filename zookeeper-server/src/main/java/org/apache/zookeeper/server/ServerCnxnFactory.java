@@ -41,7 +41,7 @@ import org.slf4j.LoggerFactory;
 
 
 public abstract class ServerCnxnFactory {
-
+    //服务端通讯工厂，默认：NIOServerCnxnFactory
     public static final String ZOOKEEPER_SERVER_CNXN_FACTORY = "zookeeper.serverCnxnFactory";
     
     private static final Logger LOG = LoggerFactory.getLogger(ServerCnxnFactory.class);
@@ -124,6 +124,7 @@ public abstract class ServerCnxnFactory {
     public abstract void closeAll();
     
     static public ServerCnxnFactory createFactory() throws IOException {
+        //加载配置的通讯工厂
         String serverCnxnFactoryName =
             System.getProperty(ZOOKEEPER_SERVER_CNXN_FACTORY);
         if (serverCnxnFactoryName == null) {

@@ -81,6 +81,7 @@ public class PurgeTxnLog {
         List<File> snaps = txnLog.findNRecentSnapshots(num);
         int numSnaps = snaps.size();
         if (numSnaps > 0) {
+            //清理过期快照
             purgeOlderSnapshots(txnLog, snaps.get(numSnaps - 1));
         }
     }

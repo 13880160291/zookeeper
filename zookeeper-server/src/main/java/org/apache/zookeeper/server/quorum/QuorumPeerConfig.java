@@ -93,7 +93,9 @@ public class QuorumPeerConfig {
     protected long serverId = UNSET_SERVERID;
 
     protected QuorumVerifier quorumVerifier = null, lastSeenQuorumVerifier = null;
+    //默认最少保留的快照数量
     protected int snapRetainCount = 3;
+    //快照清理机制：0 默认关闭
     protected int purgeInterval = 0;
     protected boolean syncEnabled = true;
 
@@ -601,6 +603,7 @@ public class QuorumPeerConfig {
     void setupQuorumPeerConfig(Properties prop, boolean configBackwardCompatibilityMode)
             throws IOException, ConfigException {
         quorumVerifier = parseDynamicConfig(prop, electionAlg, true, configBackwardCompatibilityMode);
+        //解析myId
         setupMyId();
         setupClientPort();
         setupPeerType();
@@ -686,6 +689,7 @@ public class QuorumPeerConfig {
             br.close();
         }
         try {
+            //myId
             serverId = Long.parseLong(myIdString);
             MDC.put("myid", myIdString);
         } catch (NumberFormatException e) {

@@ -680,10 +680,11 @@ public class NIOServerCnxnFactory extends ServerCnxnFactory {
         for(int i=0; i<numSelectorThreads; ++i) {
             selectorThreads.add(new SelectorThread(i));
         }
-
+        //nio 通讯
         this.ss = ServerSocketChannel.open();
         ss.socket().setReuseAddress(true);
         LOG.info("binding to port " + addr);
+        //绑定配置端口
         ss.socket().bind(addr);
         ss.configureBlocking(false);
         acceptThread = new AcceptThread(ss, addr, selectorThreads);

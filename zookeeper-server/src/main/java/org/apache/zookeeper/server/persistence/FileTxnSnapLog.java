@@ -222,10 +222,12 @@ public class FileTxnSnapLog {
      */
     public long restore(DataTree dt, Map<Long, Integer> sessions,
                         PlayBackListener listener) throws IOException {
+        //分支1：加载快照数据到内存
         long deserializeResult = snapLog.deserialize(dt, sessions);
         FileTxnLog txnLog = new FileTxnLog(dataDir);
 
         RestoreFinalizer finalizer = () -> {
+            //分支2：从编辑日志加载数据
             long highestZxid = fastForwardFromEdits(dt, sessions, listener);
             return highestZxid;
         };
