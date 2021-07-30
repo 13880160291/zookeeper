@@ -261,6 +261,7 @@ public class QuorumCnxManager {
                             boolean listenOnAllIPs,
                             int quorumCnxnThreadsSize,
                             boolean quorumSaslAuthEnabled) {
+        //接受消息队列
         this.recvQueue = new ArrayBlockingQueue<Message>(RECV_CAPACITY);
         this.queueSendMap = new ConcurrentHashMap<Long, ArrayBlockingQueue<ByteBuffer>>();
         this.senderWorkerMap = new ConcurrentHashMap<Long, SendWorker>();
@@ -986,7 +987,7 @@ public class QuorumCnxManager {
         }
 
         /**
-         * Halts this listener thread.
+         * Halts（停止线程） this listener thread.
          */
         void halt(){
             try{

@@ -615,8 +615,9 @@ public class FastLeaderElection implements Election {
         this.self = self;
         proposedLeader = -1;
         proposedZxid = -1;
-
+        //发送队列
         sendqueue = new LinkedBlockingQueue<ToSend>();
+        //接受队列
         recvqueue = new LinkedBlockingQueue<Notification>();
         this.messenger = new Messenger(manager);
     }
